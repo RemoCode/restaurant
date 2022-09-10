@@ -1,0 +1,13 @@
+{% extends 'burgerplace/base.html' %}
+{% block title %}Signup{% endblock %}
+
+{% block content %}
+  <div class="signup-form">
+    <h2>Signup</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form }}
+      <button class="submit-button" type="submit">Signup</button>
+    </form>
+  </div>
+{% endblock %}
