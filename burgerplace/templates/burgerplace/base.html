@@ -20,15 +20,16 @@
             />
             <h1 class="title">Burgerplace</h1>
           </div>
-          <nav class="navbar">
-            <a class="nav-item" href="{% url 'home' %}">Home</a>
-            <a class="nav-item" href="{% url 'menuitems' %}">Menuitems</a>
-            <a class="nav-item" href="{% url 'ingredients' %}">Ingredients</a>
-            <a class="nav-item" href="{% url 'purchases' %}">Purchases</a>
-            {% comment %}
-            <p>My comment</p>
-            {% endcomment %}
-          </nav>
+          {% if user.is_authenticated %}
+            <p>Hi, {{ user.username }}!</p>
+            <nav class="navbar">
+              <a class="nav-item" href="{% url 'home' %}">Home</a>
+              <a class="nav-item" href="{% url 'menuitems' %}">Menuitems</a>
+              <a class="nav-item" href="{% url 'ingredients' %}">Ingredients</a>
+              <a class="nav-item" href="{% url 'purchases' %}">Purchases</a>
+              <a class="nav-item" href="{% url 'logout' %}">Logout</a>
+            </nav>
+          {% endif %}
         </header>
         <main>{% block content %}{% endblock %}</main>
       </div>

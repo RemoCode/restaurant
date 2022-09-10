@@ -3,10 +3,13 @@ from .models import Ingredient, MenuItem, RecipeRequirement, Purchase
 from .forms import IngredientForm, MenuItemForm, RecipeRequirementForm
 
 from django.views.generic import TemplateView, ListView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import logout
 
 # Create your views here.
-class HomeView(TemplateView):
+class HomeView(LoginRequiredMixin, TemplateView):
     template_name = 'burgerplace/index.html'
 
     # def get_context_data(self):
@@ -16,25 +19,25 @@ class HomeView(TemplateView):
     #     # context["reciperequirements"] = RecipeRequirement.objects.all()
     #     return context
 
-class IngredientsView(ListView):
+class IngredientsView(LoginRequiredMixin, ListView):
     model = Ingredient
     template_name = 'burgerplace/ingredients.html'
 
-class CreateIngredientView(CreateView):
+class CreateIngredientView(LoginRequiredMixin, CreateView):
     model = Ingredient
     form_class = IngredientForm
     template_name = 'burgerplace/create_ingredient.html'
 
-class MenuItemsView(ListView):
+class MenuItemsView(LoginRequiredMixin, ListView):
     model = MenuItem
     template_name = 'burgerplace/menuitems.html'
 
-class CreateMenuItemView(CreateView):
+class CreateMenuItemView(LoginRequiredMixin, CreateView):
     model = MenuItem
     form_class = MenuItemForm
     template_name = 'burgerplace/create_menuitem.html'
 
-class RecipesRequirementsView(TemplateView):
+class RecipesRequirementsView(LoginRequiredMixin, TemplateView):
     template_name = 'burgerplace/reciperequirements.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -44,16 +47,16 @@ class RecipesRequirementsView(TemplateView):
             context["reciperequirements"] = [{'quantity':0, 'ingredient':'No ingredients found'}]
         return context
 
-class CreateRecipeRequirementView(CreateView):
+class CreateRecipeRequirementView(LoginRequiredMixin, CreateView):
     model = RecipeRequirement
     form_class = RecipeRequirementForm
     template_name = 'burgerplace/create_reciperequirement.html'
 
-class PurchasesView(ListView):
+class PurchasesView(LoginRequiredMixin, ListView):
     model = Purchase
     template_name = 'burgerplace/purchases.html'
 
-class CreatePurchaseView(TemplateView):
+class CreatePurchaseView(LoginRequiredMixin, TemplateView):
     template_name = 'burgerplace/create_purchase.html'
 
     def get_context_data(self, **kwargs):
@@ -76,3 +79,7 @@ class CreatePurchaseView(TemplateView):
 
         purchase.save()
         return redirect("/purchases")
+
+def log_out(request):
+    logout(request)
+    return redirect("/")
