@@ -29,6 +29,11 @@
               <a class="nav-item" href="{% url 'purchases' %}">Purchases</a>
               <a class="nav-item" href="{% url 'logout' %}">Logout</a>
             </nav>
+          {% else %}
+            <nav class="navbar">
+              <a class="nav-item" href="{% url 'login' %}">Login</a>
+              <a class="nav-item" href="{% url 'signup' %}">Signup</a>
+            </nav>
           {% endif %}
         </header>
         <main>{% block content %}{% endblock %}</main>
