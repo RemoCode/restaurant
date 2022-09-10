@@ -23,16 +23,27 @@
           {% if user.is_authenticated %}
             <p>Hi, {{ user.username }}!</p>
             <nav class="navbar">
-              <a class="nav-item" href="{% url 'home' %}">Home</a>
-              <a class="nav-item" href="{% url 'menuitems' %}">Menuitems</a>
-              <a class="nav-item" href="{% url 'ingredients' %}">Ingredients</a>
-              <a class="nav-item" href="{% url 'purchases' %}">Purchases</a>
+              {% url 'home' as home_url %}
+              {% url 'menuitems' as menuitems_url %}
+              {% url 'create_menuitem' as create_menuitem_url %}
+              {% url 'reciperequirements' as reciperequirements_url %}
+              {% url 'create_reciperequirement' as create_reciperequirement_url %}
+              {% url 'ingredients' as ingredients_url %}
+              {% url 'create_ingredient' as create_ingredient_url %}
+              {% url 'purchases' as purchases_url %}
+              {% url 'create_purchase' as create_purchase_url %}
+              <a class="nav-item{% if request.path == home_url %} current-page{% endif %}" href="{% url 'home' %}">Home</a>
+              <a class="nav-item{% if request.path == menuitems_url or request.path == create_menuitem_url or request.path == reciperequirements_url or request.path == create_reciperequirement_url %} current-page{% endif %}" href="{% url 'menuitems' %}">Menuitems</a>
+              <a class="nav-item{% if request.path == ingredients_url or request.path == create_ingredient_url %} current-page{% endif %}" href="{% url 'ingredients' %}">Ingredients</a>
+              <a class="nav-item{% if request.path == purchases_url or request.path == create_purchase_url %} current-page{% endif %}" href="{% url 'purchases' %}">Purchases</a>
               <a class="nav-item" href="{% url 'logout' %}">Logout</a>
             </nav>
           {% else %}
             <nav class="navbar">
-              <a class="nav-item" href="{% url 'login' %}">Login</a>
-              <a class="nav-item" href="{% url 'signup' %}">Signup</a>
+              {% url 'login' as login_url %}
+              {% url 'signup' as signup_url %}
+              <a class="nav-item{% if request.path == login_url %} current-page{% endif %}" href="{% url 'login' %}">Login</a>
+              <a class="nav-item{% if request.path == signup_url %} current-page{% endif %}" href="{% url 'signup' %}">Signup</a>
             </nav>
           {% endif %}
         </header>
