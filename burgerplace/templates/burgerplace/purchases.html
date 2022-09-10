@@ -1,0 +1,26 @@
+{% extends 'burgerplace/base.html' %}
+{% load static %} 
+{% block title %}Purchases{% endblock %}
+{% block content %}
+<div class="home">
+  <div>
+    <h2>Purchases</h2>
+    <table class="purchases-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for purchase in object_list %}
+        <tr>
+          <td>{{ purchase.menuitem }}</td>
+          <td>{{ purchase.datetime_of_purchase }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="{% url 'create_purchase' %}" style="display: inherit; text-align: center; border-radius: 15px; text-decoration: none; color: inherit; padding: 4px; background-color: lightgreen;">➕</a>
+  </div>
+</div>
+{% endblock %}

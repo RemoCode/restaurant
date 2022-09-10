@@ -1,0 +1,29 @@
+{% extends 'burgerplace/base.html' %}
+{% load static %} 
+{% block title %}Ingredients{% endblock %}
+{% block content %}
+<div class="home">
+    <div>
+        <h2>Ingredients</h2>
+        <table class="ingredient-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Available Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ingredient in object_list|dictsort:"name" %}
+                <tr>
+                    <td>{{ ingredient.name }}</td>
+                    <td>{{ ingredient.price_per_unit }}</td>
+                    <td>{{ ingredient.available_quantity }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'create_ingredient' %}" style="display: inherit; text-align: center; border-radius: 15px; text-decoration: none; color: inherit; padding: 4px; background-color: lightgreen;">➕</a>
+    </div>
+</div>
+{% endblock %}

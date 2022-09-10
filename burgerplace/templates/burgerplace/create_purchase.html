@@ -1,0 +1,14 @@
+{% extends 'burgerplace/base.html' %}
+{% load static %}
+{% block content %}
+<h2>Add a New Purchase</h2>
+<form method="post">
+    {% csrf_token %}
+    <select name="menuitem">
+        {% for menuitem in menuitems %}
+            <option value="{{ menuitem.id }}">{{ menuitem.name }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Submit" />
+</form>
+{% endblock %}

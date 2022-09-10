@@ -1,0 +1,29 @@
+{% extends 'burgerplace/base.html' %}
+{% load static %} 
+{% block title %}Menuitems{% endblock %}
+{% block content %}
+<div class="home">
+  <div>
+    <h2>Menuitems</h2>
+    <table class="menuitems-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Recipe</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for menuitem in object_list|dictsort:"name" %}
+        <tr>
+          <td>{{ menuitem.name }}</td>
+          <td><a href="{% url "reciperequirements" menuitem.id %}">See Recipe</a></td>
+          <td>{{ menuitem.price }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="{% url 'create_menuitem' %}" style="display: inherit; text-align: center; border-radius: 15px; text-decoration: none; color: inherit; padding: 4px; background-color: lightgreen;">➕</a>
+  </div>
+</div>
+{% endblock %}

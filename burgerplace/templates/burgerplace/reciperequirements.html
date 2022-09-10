@@ -1,0 +1,11 @@
+{% extends 'burgerplace/base.html' %}
+{% load static %}
+{% block content %}
+<h2>Recipe for {{ menu.name }}</h2>
+{% for reciperequirement in reciperequirements %}
+    <ul>
+        <li>{{ reciperequirement.quantity }}x {{ reciperequirement.ingredient }}</li>
+    </ul>
+{% endfor %}
+<a href="{% url 'create_reciperequirement' %}" style="display: inherit; text-align: center; border-radius: 15px; text-decoration: none; color: inherit; padding: 4px; background-color: lightgreen;">Add Ingredient</a>
+{% endblock %}

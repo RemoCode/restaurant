@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'burgerplace/style.css' %}" />
+    <title>{% block title %}Burgerplace{% endblock %}</title>
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <div class="app">
+        <header>
+          <div class="header-first-row">
+            <img
+              src="{% static 'burgerplace/burger-logo.png' %}"
+              alt="Logo"
+              width="80px"
+            />
+            <h1 class="title">Burgerplace</h1>
+          </div>
+          <nav class="navbar">
+            <a class="nav-item" href="{% url 'home' %}">Home</a>
+            <a class="nav-item" href="{% url 'menuitems' %}">Menuitems</a>
+            <a class="nav-item" href="{% url 'ingredients' %}">Ingredients</a>
+            <a class="nav-item" href="{% url 'purchases' %}">Purchases</a>
+            {% comment %}
+            <p>My comment</p>
+            {% endcomment %}
+          </nav>
+        </header>
+        <main>{% block content %}{% endblock %}</main>
+      </div>
+</body>
+</html>
